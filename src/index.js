@@ -1,3 +1,5 @@
+var eventListener = require('eventlistener');
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -45,24 +47,26 @@ ${channels.map(channel => {
 };
 
 // implementation
-// let promise = fetchChannels('starcraft');
-// promise
-//   .then(response => response.json())
-//   .then(obj => obj.channels)
-//   .then(updateList);
-// let timer;
-// input.addEventListenter('keyup', event => {
-//   const term = event.target.value;
-//   if (timer) {
-//     clearTimeout(timer);
-//   }
-//   timer = setTimeout(function() {
-//     fetchChannels(term)
-//       .then(resp => resp.json())
-//       .then(obj => obj.channels)
-//       .then(updateList);
-//   }, 300);
-// });
+let promise = fetchChannels('starcraft');
+promise
+  .then(response => response.json())
+  .then(obj => obj.channels)
+  .then(updateList);
+
+let addEventListener = eventListener.add(window, 'load', onload);
+let timer;
+input.addEventListenter('keyup', event => {
+  const term = event.target.value;
+  if (timer) {
+    clearTimeout(timer);
+  }
+  timer = setTimeout(function() {
+    fetchChannels(term)
+      .then(resp => resp.json())
+      .then(obj => obj.channels)
+      .then(updateList);
+  }, 300);
+});
 // let emitter = new EventE();
 
 // input.addEventListener('keyup', event => {
