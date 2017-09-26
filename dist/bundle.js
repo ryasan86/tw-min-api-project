@@ -693,6 +693,9 @@ var eventListener = __webpack_require__(8);
 
 const el = document.querySelector('#input');
 const out = document.querySelector('#output');
+const myInput = document.getElementById('#input');
+
+console.log(myInput);
 
 const fetchChannels = term => {
   return fetch(
@@ -731,6 +734,8 @@ ${channels.map(channel => {
   })}
 </div>
 `;
+
+  out.innerHTML = contents;
 };
 
 // implementation
@@ -740,20 +745,21 @@ promise
   .then(obj => obj.channels)
   .then(updateList);
 
-let addEventListener = eventListener.add(window, 'load', onload);
 let timer;
-input.addEventListenter('keyup', event => {
+console.log('breakpoint');
+myInput.addEventListenter('keyup', event => {
   const term = event.target.value;
   if (timer) {
     clearTimeout(timer);
   }
   timer = setTimeout(function() {
     fetchChannels(term)
-      .then(resp => resp.json())
+      .then(response => response.json())
       .then(obj => obj.channels)
       .then(updateList);
   }, 300);
 });
+
 // let emitter = new EventE();
 
 // input.addEventListener('keyup', event => {
