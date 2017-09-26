@@ -1,14 +1,13 @@
-var eventListener = require('eventlistener');
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'EventEmitter';
+let emitter = new EventEmitter();
+// import { EventEmitter } from 'EventEmitter';
 
 const el = document.querySelector('#input');
 const out = document.querySelector('#output');
-const myInput = document.getElementById('#input');
-
-console.log(myInput);
+// const emitter = new EventEmitter();
 
 const fetchChannels = term => {
   return fetch(
@@ -58,33 +57,30 @@ ${channels.map(channel => {
 //   .then(obj => obj.channels)
 //   .then(updateList);
 
-
-
-
-
-const myInput = document.getElementById('#input');
-let timer;
-
 console.log('breakpoint');
-myInput.addEventListenter('keyup', event => {
-  const term = event.target.value;
-  if (timer) {
-    clearTimeout(timer);
-  }
-  timer = setTimeout(function() {
-    fetchChannels(term)
-      .then(response => response.json())
-      .then(obj => obj.channels)
-      .then(updateList);
-  }, 300);
+
+// let timer;
+// input.addEventListenter('keyup', event => {
+//   const term = event.target.value;
+//   if (timer) {
+//     clearTimeout(timer);
+//   }
+//   timer = setTimeout(function() {
+//     fetchChannels(term)
+//       .then(response => response.json())
+//       .then(obj => obj.channels)
+//       .then(updateList);
+//   }, 300);
+// });
+
+input.addEventListener('keyup', event => {
+  emitter.emit('input', event);
 });
 
-// let emitter = new EventE();
-
-// input.addEventListener('keyup', event => {
-//   emitter.emit('input', event);
-// });
-// emitter.on('input', event => console.log(event));
-// function newFunction() {
-//   console.log('nada');
-// }
+emitter.on('input', event => {
+  const term = event.target.value;
+  fetchChannels(term)
+    .then(response => response.json())
+    .then(obj => obj.channels)
+    .then(updateList);
+});

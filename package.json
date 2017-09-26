@@ -22,7 +22,7 @@
     "webpack": "^3.6.0"
   },
   "dependencies": {
-    "eventlistener": "0.0.1",
+    "EventEmitter": "^1.0.0",
     "rxjs": "^5.4.3"
   }
 }
