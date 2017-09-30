@@ -1,13 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'EventEmitter';
-let emitter = new EventEmitter();
-// import { EventEmitter } from 'EventEmitter';
 
 const el = document.querySelector('#input');
 const out = document.querySelector('#output');
-// const emitter = new EventEmitter();
 
 const fetchChannels = term => {
   return fetch(
@@ -28,7 +21,7 @@ ${channels.map(channel => {
     <div class="media-content">
         <div class="content">
             <p>
-                <a href="${channel.videoUrl}" target="_blank"><strong>${channel.name}</strong></a> <small class="tw" style="float:right;">channel views: {$channel.views}</small>
+                <a href="${channel.videoUrl}" target="_blank"><strong>${channel.name}</strong></a> <small class="tw" style="float:right;">channel views: ${channel.views}</small>
             </p>
             <p>
                 ${channel.status}
@@ -57,7 +50,7 @@ ${channels.map(channel => {
 //   .then(obj => obj.channels)
 //   .then(updateList);
 
-console.log('breakpoint');
+// console.log('breakpoint');
 
 // let timer;
 // input.addEventListenter('keyup', event => {
@@ -76,6 +69,7 @@ console.log('breakpoint');
 input.addEventListener('keyup', event => {
   emitter.emit('input', event);
 });
+let emitter = new EventEmitter();
 
 emitter.on('input', event => {
   const term = event.target.value;
