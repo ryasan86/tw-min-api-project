@@ -115,27 +115,6 @@ ${channels.map(channel => {
   out.innerHTML = contents;
 };
 
-// implementation
-// let promise = fetchChannels('starcraft');
-// promise
-//   .then(response => response.json())
-//   .then(obj => obj.channels)
-//   .then(updateList);
-
-// let timer;
-// input.addEventListenter('keyup', event => {
-//   const term = event.target.value;
-//   if (timer) {
-//     clearTimeout(timer);
-//   }
-//   timer = setTimeout(function() {
-//     fetchChannels(term)
-//       .then(response => response.json())
-//       .then(obj => obj.channels)
-//       .then(updateList);
-//   }, 300);
-// });
-
 input.addEventListener('keyup', event => {
   emitter.emit('input', event);
 });
