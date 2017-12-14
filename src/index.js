@@ -1,4 +1,3 @@
-
 const el = document.querySelector('#input');
 const out = document.querySelector('#output');
 
@@ -21,7 +20,11 @@ ${channels.map(channel => {
     <div class="media-content">
         <div class="content">
             <p>
-                <a href="${channel.videoUrl}" target="_blank"><strong>${channel.name}</strong></a> <small class="tw" style="float:right;">channel views: ${channel.views}</small>
+                <a href="${channel.videoUrl}" target="_blank"><strong>${
+      channel.name
+    }</strong></a> <small class="tw" style="float:right;">channel views: ${
+      channel.views
+    }</small>
             </p>
             <p>
                 ${channel.status}
@@ -49,8 +52,6 @@ ${channels.map(channel => {
 //   .then(response => response.json())
 //   .then(obj => obj.channels)
 //   .then(updateList);
-
-// console.log('breakpoint');
 
 // let timer;
 // input.addEventListenter('keyup', event => {
